@@ -1,0 +1,12 @@
+spring:
+  flyway:
+    out-of-order: true
+    baseline-on-migrate: true
+  datasource:
+    url: jdbc:postgresql://localhost:5432/organizer
+    username: postgres
+    password: huK1992&DmytrO03_11
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
