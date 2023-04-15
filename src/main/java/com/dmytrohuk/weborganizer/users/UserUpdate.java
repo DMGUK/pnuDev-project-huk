@@ -7,16 +7,19 @@ public class UserUpdate {
 
     private String firstName;
 
-    private String lastName;
+    private String surname;
 
     private String email;
 
-    public UserUpdate(String username, String password, String firstName, String lastName, String email) {
+    private String address;
+    public UserUpdate(String username, String password, String firstName, String surname,
+                      String email, String address) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;
-        this.lastName = lastName;
+        this.surname = surname;
         this.email = email;
+        this.address = address;
     }
 
     public String getUsername() {
@@ -31,11 +34,15 @@ public class UserUpdate {
         return firstName;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getSurname() {
+        return surname;
     }
 
     public String getEmail() {
         return email;
+    }
+
+    public String getAddress() {
+        return address;
     }
 }

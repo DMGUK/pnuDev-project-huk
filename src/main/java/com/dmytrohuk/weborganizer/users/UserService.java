@@ -3,6 +3,7 @@ package com.dmytrohuk.weborganizer.users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Objects;
@@ -26,7 +27,7 @@ public class UserService {
     }
 
     @Transactional
-    public User updateUser(Long id, UserUpdate userUpdate) {
+    public User updateUser(Long id, @RequestBody UserUpdate userUpdate) {
         Optional<User> optionalUser = userRepository.findById(id);
         if (optionalUser.isPresent()) {
             User existingUser = optionalUser.get();
@@ -34,7 +35,8 @@ public class UserService {
             existingUser.setPassword(userUpdate.getPassword());
             existingUser.setEmail(userUpdate.getEmail());
             existingUser.setFirstName(userUpdate.getFirstName());
-            existingUser.setLastName(userUpdate.getLastName());
+            existingUser.setSurname(userUpdate.getSurname());
+            existingUser.setAddress(userUpdate.getAddress());
             return userRepository.save(existingUser);
         } else {
             throw new IllegalStateException("User with id " + id + " not found");

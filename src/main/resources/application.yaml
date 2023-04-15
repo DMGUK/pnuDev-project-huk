@@ -8,5 +8,5 @@ spring:
     password: huK1992&DmytrO03_11
   jpa:
     hibernate:
-      ddl-auto: validate
+      ddl-auto: update
     show-sql: true

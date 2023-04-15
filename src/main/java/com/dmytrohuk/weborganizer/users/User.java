@@ -7,18 +7,11 @@ import jakarta.persistence.*;
 public class User {
 
     @Id
-    @SequenceGenerator(
-            name = "user_sequence",
-            sequenceName = "user_sequence",
-            allocationSize = 1
-    )
     @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "user_sequence"
+            strategy = GenerationType.AUTO
     )
     private Long id;
 
-    @Transient
     @Column(name = "username")
     private String username;
 
@@ -28,16 +21,24 @@ public class User {
     private String firstName;
 
     @Column(name = "last_name")
-    private String lastName;
+    private String surname;
 
     private String email;
 
-    public User(String username, String password, String firstName, String lastName, String email) {
+    private String address;
+
+    @Column(name = "role")
+    private String role;
+
+    public User(String username, String password, String firstName,
+                String surname, String email, String address, String role) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;
-        this.lastName = lastName;
+        this.surname = surname;
         this.email = email;
+        this.address = address;
+        this.role = role;
     }
 
     public User() {
@@ -75,12 +76,12 @@ public class User {
         this.firstName = firstName;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getSurname() {
+        return surname;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     public String getEmail() {
@@ -89,5 +90,21 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }
