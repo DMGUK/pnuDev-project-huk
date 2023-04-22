@@ -1,6 +1,7 @@
 package com.dmytrohuk.weborganizer.notes;
 
 import com.dmytrohuk.weborganizer.users.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -33,10 +34,11 @@ public class Note {
     private final LocalDate created_date = LocalDate.now();
 
     @Column(name = "updated_date")
-    private final LocalDate updated_date = LocalDate.now();
+    private LocalDate updated_date;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
+    @JsonIgnore
     private User user_id;
 
 }
