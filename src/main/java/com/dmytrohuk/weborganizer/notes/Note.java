@@ -30,11 +30,8 @@ public class Note {
     @Column(name = "content")
     private String content;
 
-    @Column(name = "created_date")
-    private final LocalDate created_date = LocalDate.now();
-
-    @Column(name = "updated_date")
-    private LocalDate updated_date;
+    @Column(name = "date")
+    private LocalDate date;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)

@@ -36,7 +36,7 @@ public class NoteService {
         Note existingNote = optionalNote.get();
         existingNote.setTitle(noteUpdate.getTitle());
         existingNote.setContent(noteUpdate.getContent());
-        existingNote.setUpdated_date(LocalDate.now());
+        existingNote.setDate(LocalDate.now());
         return noteRepository.save(existingNote);
     }
 
