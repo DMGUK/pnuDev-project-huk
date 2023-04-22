@@ -1,5 +1,12 @@
 package com.dmytrohuk.weborganizer.users;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserUpdate {
     private String username;
 
@@ -12,37 +19,4 @@ public class UserUpdate {
     private String email;
 
     private String address;
-    public UserUpdate(String username, String password, String firstName, String surname,
-                      String email, String address) {
-        this.username = username;
-        this.password = password;
-        this.firstName = firstName;
-        this.surname = surname;
-        this.email = email;
-        this.address = address;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getAddress() {
-        return address;
-    }
 }

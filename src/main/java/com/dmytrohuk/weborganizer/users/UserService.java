@@ -28,19 +28,19 @@ public class UserService {
 
     @Transactional
     public User updateUser(Long id, @RequestBody UserUpdate userUpdate) {
-        Optional<User> optionalUser = userRepository.findById(id);
-        if (optionalUser.isPresent()) {
-            User existingUser = optionalUser.get();
-            existingUser.setUsername(userUpdate.getUsername());
-            existingUser.setPassword(userUpdate.getPassword());
-            existingUser.setEmail(userUpdate.getEmail());
-            existingUser.setFirstName(userUpdate.getFirstName());
-            existingUser.setSurname(userUpdate.getSurname());
-            existingUser.setAddress(userUpdate.getAddress());
-            return userRepository.save(existingUser);
-        } else {
-            throw new IllegalStateException("User with id " + id + " not found");
-        }
+        Optional<User> optionalUser = Optional.ofNullable(userRepository.findById(id).orElseThrow(
+                () -> new IllegalStateException(
+                        "student with id " + id + "does not exist"
+                )
+        ));
+        User existingUser = optionalUser.get();
+        existingUser.setUsername(userUpdate.getUsername());
+        existingUser.setPassword(userUpdate.getPassword());
+        existingUser.setEmail(userUpdate.getEmail());
+        existingUser.setFirstName(userUpdate.getFirstName());
+        existingUser.setSurname(userUpdate.getSurname());
+        existingUser.setAddress(userUpdate.getAddress());
+        return userRepository.save(existingUser);
     }
 
     public void deleteUser(Long id) {
