@@ -3,22 +3,25 @@ package com.dmytrohuk.weborganizer.users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @Service
 public class UserService {
     @Autowired
     private UserRepository userRepository;
-
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
-
+    // list<userDTO> {return userDTO}
+    // mapper from user to userDTO (mapstruct)
     public Optional<User> getUserById(Long id) {
+        User existingUser = userRepository.findById(id).orElseThrow(
+            () -> new UserNotFoundException(
+                    new Throwable("User with id " + id + " does not exist")
+            )
+        );
         return userRepository.findById(id);
     }
 
@@ -27,28 +30,27 @@ public class UserService {
     }
 
     @Transactional
-    public User updateUser(Long id, @RequestBody UserUpdate userUpdate) {
-        Optional<User> optionalUser = Optional.ofNullable(userRepository.findById(id).orElseThrow(
-                () -> new IllegalStateException(
-                        "student with id " + id + "does not exist"
-                )
-        ));
-        User existingUser = optionalUser.get();
-        existingUser.setUsername(userUpdate.getUsername());
-        existingUser.setPassword(userUpdate.getPassword());
-        existingUser.setEmail(userUpdate.getEmail());
-        existingUser.setFirstName(userUpdate.getFirstName());
-        existingUser.setSurname(userUpdate.getSurname());
-        existingUser.setAddress(userUpdate.getAddress());
+    public User updateUser(Long id, UserDTO userDTO) {
+        User existingUser = userRepository.findById(id).orElseThrow(
+            () -> new UserNotFoundException(
+                new Throwable("User with id " + id + " does not exist")
+            )
+        );
+        existingUser.setUsername(userDTO.getUsername());
+        existingUser.setPassword(userDTO.getPassword());
+        existingUser.setEmail(userDTO.getEmail());
+        existingUser.setFirstName(userDTO.getFirstName());
+        existingUser.setSurname(userDTO.getSurname());
+        existingUser.setAddress(userDTO.getAddress());
         return userRepository.save(existingUser);
     }
 
     public void deleteUser(Long id) {
-        Optional<User> optionalUser = userRepository.findById(id);
-        if (optionalUser.isPresent()) {
-            userRepository.deleteById(id);
-        } else {
-            throw new IllegalStateException("User with id " + id + " not found");
-        }
+        User existingUser = userRepository.findById(id).orElseThrow(
+            () -> new UserNotFoundException(
+                    new Throwable("User with id " + id + " does not exist")
+            )
+        );
+        userRepository.deleteById(id);
     }
 }

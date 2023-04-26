@@ -1,19 +1,28 @@
 package com.dmytrohuk.weborganizer.notes;
 
-import jakarta.persistence.Column;
+import com.dmytrohuk.weborganizer.users.User;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class NoteUpdate {
+public class NoteDTO {
+    private Long id;
+
     private String title;
 
     private String content;
 
-    private LocalDate updated_date;
+    private LocalDate createdDate;
+
+    private LocalDate updatedDate;
+
+    private User user;
+
 }

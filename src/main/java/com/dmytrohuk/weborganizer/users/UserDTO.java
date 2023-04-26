@@ -7,7 +7,14 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserUpdate {
+public class UserDTO {
+
+    /* TODO :
+     *  Create separate UpdateUserDTO class
+     *  Add a list of notes into UpdateUserDTO
+     *  This UserDTO will map into User using MapStruct interface
+     * */
+
     private String username;
 
     private String password;

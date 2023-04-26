@@ -3,12 +3,8 @@ package com.dmytrohuk.weborganizer.notes;
 import com.dmytrohuk.weborganizer.users.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-import java.sql.Timestamp;
 import java.time.LocalDate;
 
 @Entity
@@ -30,12 +26,26 @@ public class Note {
     @Column(name = "content")
     private String content;
 
-    @Column(name = "date")
-    private LocalDate date;
+    @Column(name = "created_date")
+    private LocalDate created_date;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+
+    @Column(name = "updated_date")
+    private LocalDate updated_date;
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false, insertable=false, updatable=false)
     @JsonIgnore
-    private User user_id;
+    private User user;
 
+
+    @Column(name = "user_id")
+    private Long userId;
+
+
+    public void setUser(User user) {
+        this.user = user;
+        user.getNotes().add(this);
+    }
 }

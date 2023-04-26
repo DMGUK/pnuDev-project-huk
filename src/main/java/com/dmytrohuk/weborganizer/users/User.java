@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -29,7 +30,7 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "firstName")
+    @Column(name = "firstname")
     private String firstName;
 
     @Column(name = "surname")
@@ -44,6 +45,6 @@ public class User {
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
-    @OneToMany(mappedBy = "user_id")
-    private Set<Note> notes;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Note> notes;
 }
