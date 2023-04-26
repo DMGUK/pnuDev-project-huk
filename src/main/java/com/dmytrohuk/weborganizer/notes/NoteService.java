@@ -1,6 +1,7 @@
 package com.dmytrohuk.weborganizer.notes;
 
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,7 +12,7 @@ import java.util.Optional;
 @Service
 @AllArgsConstructor
 public class NoteService {
-
+    @Autowired
     private NoteRepository noteRepository;
 
     public Note createNote(NoteDTO noteDTO) {
@@ -30,10 +31,10 @@ public class NoteService {
     }
 
     public Optional<Note> viewNote(Long id) {
-        Note existingNote =noteRepository.findById(id).orElseThrow(
-            () -> new NoteNotFoundException(
-                    new Throwable("Note with id " + id + " does not exist")
-            )
+        Note existingNote = noteRepository.findById(id).orElseThrow(
+                () -> new NoteNotFoundException(
+                        new Throwable("Note with id " + id + " does not exist")
+                )
         );
         return noteRepository.findById(id);
     }
@@ -41,9 +42,9 @@ public class NoteService {
     @Transactional
     public Note updateNote(Long id, NoteDTO noteDTO) {
         Note existingNote =noteRepository.findById(id).orElseThrow(
-            () -> new NoteNotFoundException(
-                new Throwable("Note with id " + id + " does not exist")
-            )
+                () -> new NoteNotFoundException(
+                        new Throwable("Note with id " + id + " does not exist")
+                )
         );
         existingNote.setTitle(noteDTO.getTitle());
         existingNote.setContent(noteDTO.getContent());
@@ -51,11 +52,11 @@ public class NoteService {
         return noteRepository.save(existingNote);
     }
 
-    public void deleteNote(Long id) {
+    public void deleteUser(Long id) {
         Note existingNote = noteRepository.findById(id).orElseThrow(
-            () -> new NoteNotFoundException(
-                new Throwable("Note with id " + id + " does not exist")
-            )
+                () -> new NoteNotFoundException(
+                        new Throwable("Note with id " + id + " does not exist")
+                )
         );
         noteRepository.deleteById(id);
     }
