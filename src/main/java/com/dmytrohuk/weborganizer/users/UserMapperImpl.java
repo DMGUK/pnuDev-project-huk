@@ -1,5 +1,9 @@
 package com.dmytrohuk.weborganizer.users;
 
+import org.mapstruct.Mapper;
+import com.dmytrohuk.weborganizer.users.*;
+
+@Mapper
 public class UserMapperImpl implements UserMapper{
     @Override
     public UserDTO toUserDTO(User user) {
