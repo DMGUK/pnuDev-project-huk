@@ -9,8 +9,10 @@ import org.mapstruct.MappingTarget;
 public interface UserMapper {
     UserDTO toUserDTO(User user);
 
+    UserCreateDTO toUserCreateDTO(User user);
+
     User toUser(UserCreateDTO userDTO);
 
     @Mapping(target = "id", ignore = true)
-    void updateUserThroughMapper(UserDTO userDTO, @MappingTarget User user);
+    void updateUser(UserDTO userDTO, @MappingTarget User user);
 }

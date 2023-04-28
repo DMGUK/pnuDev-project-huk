@@ -22,12 +22,12 @@ public class NoteController {
     }
 
     @GetMapping(path = "{note-id}")
-    public Optional<Note> getUserById(@PathVariable("note-id") Long noteId){
+    public NoteCreateDTO getUserById(@PathVariable("note-id") Long noteId){
         return noteService.viewNote(noteId);
     }
 
     @PostMapping
-    public void createNewNote(@RequestBody NoteDTO noteDTO){
+    public void createNewNote(@RequestBody NoteCreateDTO noteDTO){
         noteService.createNote(noteDTO);
     }
 

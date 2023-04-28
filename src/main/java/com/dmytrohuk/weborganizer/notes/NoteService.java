@@ -15,14 +15,11 @@ public class NoteService {
     @Autowired
     private NoteRepository noteRepository;
 
-    public Note createNote(NoteDTO noteDTO) {
-        Note note = new Note();
-        note.setTitle(noteDTO.getTitle());
-        note.setContent(noteDTO.getContent());
-        note.setCreated_date(noteDTO.getCreatedDate());
-        note.setUpdated_date(noteDTO.getUpdatedDate());
-        note.setUserId(noteDTO.getUser().getId());
+    @Autowired
+    private NoteMapper noteMapper;
 
+    public Note createNote(NoteCreateDTO noteDTO) {
+        Note note = noteMapper.toNote(noteDTO);
         return noteRepository.save(note);
     }
 
@@ -30,26 +27,24 @@ public class NoteService {
         return noteRepository.findAll();
     }
 
-    public Optional<Note> viewNote(Long id) {
+    public NoteCreateDTO viewNote(Long id) {
         Note existingNote = noteRepository.findById(id).orElseThrow(
                 () -> new NoteNotFoundException(
                         new Throwable("Note with id " + id + " does not exist")
                 )
         );
-        return noteRepository.findById(id);
+        return noteMapper.toNoteCreateDTO(existingNote);
     }
 
     @Transactional
-    public Note updateNote(Long id, NoteDTO noteDTO) {
+    public NoteDTO updateNote(Long id, NoteDTO noteDTO) {
         Note existingNote =noteRepository.findById(id).orElseThrow(
                 () -> new NoteNotFoundException(
                         new Throwable("Note with id " + id + " does not exist")
                 )
         );
-        existingNote.setTitle(noteDTO.getTitle());
-        existingNote.setContent(noteDTO.getContent());
-        existingNote.setUpdated_date(LocalDate.now());
-        return noteRepository.save(existingNote);
+        noteMapper.updateNote(noteDTO, existingNote);
+        return noteMapper.toNoteDTO(noteRepository.save(existingNote));
     }
 
     public void deleteUser(Long id) {
