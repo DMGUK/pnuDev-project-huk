@@ -1,0 +1,1 @@
+ALTER SEQUENCE notes_seq INCREMENT BY 1;

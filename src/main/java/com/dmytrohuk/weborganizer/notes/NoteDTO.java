@@ -13,16 +13,11 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class NoteDTO {
-    private Long id;
-
     private String title;
 
     private String content;
 
-    private LocalDate createdDate;
+    private final LocalDate updated_date = LocalDate.now();
 
-    private LocalDate updatedDate;
-
-    private User user;
-
+    private Long userId;
 }

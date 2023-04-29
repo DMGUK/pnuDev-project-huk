@@ -37,14 +37,14 @@ public class NoteService {
     }
 
     @Transactional
-    public NoteDTO updateNote(Long id, NoteDTO noteDTO) {
+    public NoteCreateDTO updateNote(Long id, NoteDTO noteDTO) {
         Note existingNote =noteRepository.findById(id).orElseThrow(
                 () -> new NoteNotFoundException(
                         new Throwable("Note with id " + id + " does not exist")
                 )
         );
         noteMapper.updateNote(noteDTO, existingNote);
-        return noteMapper.toNoteDTO(noteRepository.save(existingNote));
+        return noteMapper.toNoteCreateDTO(noteRepository.save(existingNote));
     }
 
     public void deleteUser(Long id) {

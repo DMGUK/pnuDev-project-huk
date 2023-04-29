@@ -27,9 +27,10 @@ public class NoteController {
     }
 
     @PostMapping
-    public void createNewNote(@RequestBody NoteCreateDTO noteDTO){
-        noteService.createNote(noteDTO);
+    public Note createNewNote(@RequestBody NoteCreateDTO noteDTO){
+        return noteService.createNote(noteDTO);
     }
+
 
     @DeleteMapping(path="{note-id}")
     public void deleteUser(@PathVariable("note-id") Long userId){

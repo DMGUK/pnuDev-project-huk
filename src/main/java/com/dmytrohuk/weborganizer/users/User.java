@@ -1,5 +1,6 @@
 package com.dmytrohuk.weborganizer.users;
 
+import com.dmytrohuk.weborganizer.contacts.Contact;
 import com.dmytrohuk.weborganizer.notes.Note;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -47,4 +48,7 @@ public class User {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Note> notes;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Contact> contacts;
 }

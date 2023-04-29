@@ -10,7 +10,7 @@ public interface NoteMapper {
 
     NoteCreateDTO toNoteCreateDTO(Note note);
 
-    Note toNote(NoteCreateDTO noteDTO);
+    Note toNote(NoteCreateDTO noteCreateDTO);
 
     @Mapping(target = "id", ignore = true)
     void updateNote(NoteDTO noteDTO, @MappingTarget Note note);
