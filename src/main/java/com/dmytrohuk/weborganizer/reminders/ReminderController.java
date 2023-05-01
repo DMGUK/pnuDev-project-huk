@@ -9,6 +9,7 @@ import org.springframework.boot.context.properties.bind.Name;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/reminders")
@@ -25,8 +26,8 @@ public class ReminderController {
     }
 
     @GetMapping(path = "/", name = "calendarId")
-    public List<ReminderViewDTO> viewReminderByCalendarId(@Name("calendarId") Long calendarId){
-        return reminderService.viewReminderByCalendarId(calendarId);
+    public Optional<List<Reminder>> viewReminderByCalendarId(@Name("calendarId") Long calendarId){
+        return reminderService.getRemindersByCalendarId(calendarId);
     }
 
     @GetMapping(path = "{reminder-id}")
