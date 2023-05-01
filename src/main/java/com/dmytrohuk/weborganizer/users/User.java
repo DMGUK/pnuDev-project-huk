@@ -1,13 +1,16 @@
 package com.dmytrohuk.weborganizer.users;
 
+import com.dmytrohuk.weborganizer.calendars.Calendars;
 import com.dmytrohuk.weborganizer.contacts.Contact;
 import com.dmytrohuk.weborganizer.notes.Note;
+import com.dmytrohuk.weborganizer.reminders.Reminder;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Calendar;
 import java.util.List;
 import java.util.Set;
 
@@ -20,9 +23,8 @@ import java.util.Set;
 public class User {
 
     @Id
-    @GeneratedValue(
-            strategy = GenerationType.AUTO
-    )
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "users_generator")
+    @SequenceGenerator(name="users_generator", sequenceName = "users_SEQ", allocationSize=1)
     private Long id;
 
     @Column(name = "username")
@@ -51,4 +53,10 @@ public class User {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Contact> contacts;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Calendars> calendars;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Reminder> reminders;
 }

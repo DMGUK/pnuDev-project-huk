@@ -4,5 +4,5 @@ CREATE TABLE IF NOT EXISTS contacts(
     phone VARCHAR(20) NOT NULL,
     surname VARCHAR(20) NOT NULL,
     user_id INT NOT NULL,
-    CONSTRAINT note_user_id_foreign FOREIGN KEY(user_id) REFERENCES users(id)
+    CONSTRAINT contact_user_id_foreign FOREIGN KEY(user_id) REFERENCES users(id)
 );

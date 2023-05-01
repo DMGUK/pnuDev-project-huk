@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/users")
@@ -16,13 +15,8 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping
-    public List<User> getUsers(){
-        return userService.getAllUsers();
-    }
-
     @GetMapping(path = "{user-id}")
-    public UserCreateDTO getUserById(@PathVariable("user-id") Long userId){
+    public UserViewDTO getUserById(@PathVariable("user-id") Long userId){
         return userService.getUserById(userId);
     }
 
@@ -43,7 +37,7 @@ public class UserController {
     *
     */
     @PutMapping(path = "{user-id}")
-    public void updateUser(@PathVariable("user-id") Long userId, @RequestBody UserDTO userDTO){
-        userService.updateUser(userId, userDTO);
+    public void updateUser(@PathVariable("user-id") Long userId, @RequestBody UserUpdateDTO updateDTO){
+        userService.updateUser(userId, updateDTO);
     }
 }

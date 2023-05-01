@@ -15,9 +15,9 @@ import java.time.LocalDate;
 @Setter
 public class Note {
     @Id
-    @GeneratedValue(
-            strategy = GenerationType.AUTO
-    )
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "notes_generator")
+    @SequenceGenerator(name="notes_generator", sequenceName = "notes_SEQ", allocationSize=1)
+
     private Long id;
 
     @Column(name = "title")

@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/notes")
@@ -22,13 +21,13 @@ public class NoteController {
     }
 
     @GetMapping(path = "{note-id}")
-    public NoteCreateDTO getUserById(@PathVariable("note-id") Long noteId){
+    public NoteViewDTO getUserById(@PathVariable("note-id") Long noteId){
         return noteService.viewNote(noteId);
     }
 
     @PostMapping
-    public Note createNewNote(@RequestBody NoteCreateDTO noteDTO){
-        return noteService.createNote(noteDTO);
+    public void createNewNote(@RequestBody NoteCreateDTO noteDTO){
+        noteService.createNote(noteDTO);
     }
 
 
@@ -44,7 +43,7 @@ public class NoteController {
     *
     */
     @PutMapping(path = "{note-id}")
-    public void updateNote(@PathVariable("note-id") Long userId,@RequestBody NoteDTO noteDTO){
-        noteService.updateNote(userId, noteDTO);
+    public void updateNote(@PathVariable("note-id") Long userId,@RequestBody NoteUpdateDTO noteUpdateDTO){
+        noteService.updateNote(userId, noteUpdateDTO);
     }
 }

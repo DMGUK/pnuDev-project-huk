@@ -15,17 +15,13 @@ public class UserService {
     @Autowired
     private UserMapperImpl userMapper;
 
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
-    }
-
-    public UserCreateDTO getUserById(Long id) {
+    public UserViewDTO getUserById(Long id) {
         User existingUser = userRepository.findById(id).orElseThrow(
             () -> new UserNotFoundException(
                     new Throwable("User with id " + id + " does not exist")
             )
         );
-        return userMapper.toUserCreateDTO(existingUser);
+        return userMapper.toViewDTO(existingUser);
     }
 
     public User createUser(UserCreateDTO userDTO) {
@@ -34,14 +30,14 @@ public class UserService {
     }
 
     @Transactional
-    public UserDTO updateUser(Long id, UserDTO userDTO) {
+    public UserUpdateDTO updateUser(Long id, UserUpdateDTO updateDTO) {
         User existingUser = userRepository.findById(id).orElseThrow(
             () -> new UserNotFoundException(
                     new Throwable("User with id " + id + " does not exist")
             )
         );
-        userMapper.updateUser(userDTO, existingUser);
-        return userMapper.toUserDTO(userRepository.save(existingUser));
+        userMapper.updateUser(updateDTO, existingUser);
+        return userMapper.toUpdateDTO(userRepository.save(existingUser));
     }
 
     public void deleteUser(Long id) {

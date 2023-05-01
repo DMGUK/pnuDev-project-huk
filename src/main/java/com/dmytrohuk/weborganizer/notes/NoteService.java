@@ -5,9 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -27,23 +25,23 @@ public class NoteService {
         return noteRepository.findAll();
     }
 
-    public NoteCreateDTO viewNote(Long id) {
+    public NoteViewDTO viewNote(Long id) {
         Note existingNote = noteRepository.findById(id).orElseThrow(
                 () -> new NoteNotFoundException(
                         new Throwable("Note with id " + id + " does not exist")
                 )
         );
-        return noteMapper.toNoteCreateDTO(existingNote);
+        return noteMapper.toViewDTO(existingNote);
     }
 
     @Transactional
-    public NoteCreateDTO updateNote(Long id, NoteDTO noteDTO) {
+    public NoteCreateDTO updateNote(Long id, NoteUpdateDTO updateDTO) {
         Note existingNote =noteRepository.findById(id).orElseThrow(
                 () -> new NoteNotFoundException(
                         new Throwable("Note with id " + id + " does not exist")
                 )
         );
-        noteMapper.updateNote(noteDTO, existingNote);
+        noteMapper.updateNote(updateDTO, existingNote);
         return noteMapper.toNoteCreateDTO(noteRepository.save(existingNote));
     }
 

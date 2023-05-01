@@ -1,6 +1,5 @@
 package com.dmytrohuk.weborganizer.notes;
 
-import com.dmytrohuk.weborganizer.users.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,7 +11,7 @@ import java.time.LocalDate;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class NoteDTO {
+public class NoteUpdateDTO {
     private String title;
 
     private String content;
