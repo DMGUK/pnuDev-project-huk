@@ -1,7 +1,6 @@
 package com.dmytrohuk.weborganizer.notes;
 
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,11 +9,10 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class NoteService {
-    @Autowired
-    private NoteRepository noteRepository;
 
-    @Autowired
-    private NoteMapper noteMapper;
+    private final NoteRepository noteRepository;
+
+    private final NoteMapper noteMapper;
 
     public Note createNote(NoteCreateDTO noteDTO) {
         Note note = noteMapper.toNote(noteDTO);

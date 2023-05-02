@@ -1,21 +1,16 @@
 package com.dmytrohuk.weborganizer.calendars;
 
-import com.dmytrohuk.weborganizer.users.User;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 
 @Service
 @AllArgsConstructor
 public class CalendarsService {
-    @Autowired
-    private CalendarsRepository calendarsRepository;
+    private final CalendarsRepository calendarsRepository;
 
-    @Autowired
-    private CalendarsMapper calendarsMapper;
+    private final CalendarsMapper calendarsMapper;
 
     public Calendars createCalendar(CalendarsCreateDTO createDTO){
         Calendars calendar = calendarsMapper.toCalendar(createDTO);

@@ -8,11 +8,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @AllArgsConstructor
 public class ContactService {
-    @Autowired
-    private ContactRepository contactRepository;
+    private final ContactRepository contactRepository;
 
-    @Autowired
-    private ContactMapper contactMapper;
+    private final ContactMapper contactMapper;
 
     public Contact createContact(ContactCreateDTO createDTO){
         Contact contact = contactMapper.toContact(createDTO);

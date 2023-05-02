@@ -11,11 +11,10 @@ import java.util.Optional;
 @Service
 @AllArgsConstructor
 public class ReminderService {
-    @Autowired
-    private ReminderRepository reminderRepository;
 
-    @Autowired
-    private ReminderMapper reminderMapper;
+    private final ReminderRepository reminderRepository;
+
+    private final ReminderMapper reminderMapper;
 
     public Reminder createReminder(ReminderCreateDTO createDTO){
         Reminder reminder = reminderMapper.toReminder(createDTO);
@@ -31,17 +30,12 @@ public class ReminderService {
         return reminderMapper.toViewDTO(existingReminder);
     }
 
-    //problem with getRemindersByCalendarId(it doesn't reacts to orElseThrow())
     public List<Reminder> getRemindersByCalendarId(Long calendarId) {
-
         List<Reminder> reminders = reminderRepository.findByCalendarId(calendarId);
-        return Optional.ofNullable(reminders)
-                .orElseThrow(() -> new ReminderNotFoundException(new Throwable("No reminders found for calendar id: " + calendarId)));
-//        return reminderRepository.findByCalendarId(calendarId);
-
-//        public List<Note> getAllNotes() {
-//        return noteRepository.findAll();
-//    }
+        if (reminders.isEmpty()){
+            throw new ReminderNotFoundException(new Throwable("Calendar with id " + calendarId + " does not exist"));
+        }
+        return reminders;
     }
 
 

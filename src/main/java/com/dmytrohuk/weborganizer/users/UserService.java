@@ -9,11 +9,9 @@ import java.util.List;
 @AllArgsConstructor
 @Service
 public class UserService {
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
-    @Autowired
-    private UserMapperImpl userMapper;
+    private final UserMapper userMapper;
 
     public UserViewDTO getUserById(Long id) {
         User existingUser = userRepository.findById(id).orElseThrow(

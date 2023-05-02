@@ -3,7 +3,16 @@ package com.dmytrohuk.weborganizer.reminders;
 import com.dmytrohuk.weborganizer.calendars.Calendars;
 import com.dmytrohuk.weborganizer.users.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -40,11 +49,6 @@ public class Reminder {
     @Column(name = "user_id")
     private Long userId;
 
-    public void setUser(User user) {
-        this.user = user;
-        user.getReminders().add(this);
-    }
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "calendar_id", nullable = false, insertable=false, updatable=false)
     @JsonIgnore
@@ -52,9 +56,4 @@ public class Reminder {
 
     @Column(name = "calendar_id")
     private Long calendarId;
-
-    public void setCalendar(Calendars calendar) {
-        this.calendar = calendar;
-        calendar.getReminders().add(this);
-    }
 }
