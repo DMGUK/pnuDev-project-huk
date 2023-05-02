@@ -26,7 +26,7 @@ public class ReminderController {
     }
 
     @GetMapping(path = "/", name = "calendarId")
-    public Optional<List<Reminder>> viewReminderByCalendarId(@Name("calendarId") Long calendarId){
+    public List<Reminder> viewReminderByCalendarId(@Name("calendarId") Long calendarId){
         return reminderService.getRemindersByCalendarId(calendarId);
     }
 

@@ -15,11 +15,6 @@ public class NoteController {
         this.noteService = noteService;
     }
 
-    @GetMapping
-    public List<Note> getUsers(){
-        return noteService.getAllNotes();
-    }
-
     @GetMapping(path = "{note-id}")
     public NoteViewDTO getUserById(@PathVariable("note-id") Long noteId){
         return noteService.viewNote(noteId);

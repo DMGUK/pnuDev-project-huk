@@ -32,13 +32,16 @@ public class ReminderService {
     }
 
     //problem with getRemindersByCalendarId(it doesn't reacts to orElseThrow())
-    public Optional<List<Reminder>> getRemindersByCalendarId(Long calendarId) {
-        Optional<List<Reminder>> reminders = Optional.ofNullable(Optional.ofNullable(reminderRepository.findByCalendarId(calendarId)).orElseThrow(
-                () -> new ReminderNotFoundException(
-                        new Throwable("Calendar with id " + calendarId + " does not exists")
-                )
-        ));
-        return reminders;
+    public List<Reminder> getRemindersByCalendarId(Long calendarId) {
+
+        List<Reminder> reminders = reminderRepository.findByCalendarId(calendarId);
+        return Optional.ofNullable(reminders)
+                .orElseThrow(() -> new ReminderNotFoundException(new Throwable("No reminders found for calendar id: " + calendarId)));
+//        return reminderRepository.findByCalendarId(calendarId);
+
+//        public List<Note> getAllNotes() {
+//        return noteRepository.findAll();
+//    }
     }
 
 

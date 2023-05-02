@@ -21,10 +21,6 @@ public class NoteService {
         return noteRepository.save(note);
     }
 
-    public List<Note> getAllNotes() {
-        return noteRepository.findAll();
-    }
-
     public NoteViewDTO viewNote(Long id) {
         Note existingNote = noteRepository.findById(id).orElseThrow(
                 () -> new NoteNotFoundException(

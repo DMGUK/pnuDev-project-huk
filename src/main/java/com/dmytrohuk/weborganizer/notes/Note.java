@@ -44,8 +44,8 @@ public class Note {
     private Long userId;
 
 
-    public void setUser(User user) {
-        this.user = user;
-        user.getNotes().add(this);
-    }
+//    public void setUser(User user) {
+//        this.user = user;
+//        user.getNotes().add(this);
+//    }
 }
