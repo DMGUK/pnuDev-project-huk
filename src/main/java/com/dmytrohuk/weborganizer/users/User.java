@@ -25,10 +25,10 @@ public class User {
     @SequenceGenerator(name="users_generator", sequenceName = "users_seq", allocationSize=1)
     private Long id;
 
-    @Column(name = "username")
+    @Column(name = "username", unique = true)
     private String username;
 
-    @Column(name = "password")
+    @Column(name = "password", unique = true)
     private String password;
 
     @Column(name = "firstname")
@@ -37,7 +37,7 @@ public class User {
     @Column(name = "surname")
     private String surname;
 
-    @Column(name = "email")
+    @Column(name = "email", unique = true)
     private String email;
 
     @Column(name = "address")
