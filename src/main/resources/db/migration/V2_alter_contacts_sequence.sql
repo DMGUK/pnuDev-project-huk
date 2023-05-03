@@ -1,1 +1,0 @@
-ALTER SEQUENCE contacts_seq INCREMENT BY 1;

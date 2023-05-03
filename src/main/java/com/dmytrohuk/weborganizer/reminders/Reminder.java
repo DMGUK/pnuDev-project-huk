@@ -29,7 +29,7 @@ import java.time.LocalDate;
 public class Reminder {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "reminders_generator")
-    @SequenceGenerator(name="reminders_generator", sequenceName = "reminders_SEQ", allocationSize=1)
+    @SequenceGenerator(name="reminders_generator", sequenceName = "reminders_seq", allocationSize=1)
     private Long id;
 
     @Column(name = "title")
@@ -38,8 +38,8 @@ public class Reminder {
     @Column(name = "content")
     private String content;
 
-    @Column(name = "duedate")
-    private LocalDate duedate;
+    @Column(name = "due_date")
+    private LocalDate dueDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false, insertable=false, updatable=false)

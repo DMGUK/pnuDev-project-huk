@@ -10,9 +10,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Calendar;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -24,7 +22,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "users_generator")
-    @SequenceGenerator(name="users_generator", sequenceName = "users_SEQ", allocationSize=1)
+    @SequenceGenerator(name="users_generator", sequenceName = "users_seq", allocationSize=1)
     private Long id;
 
     @Column(name = "username")

@@ -3,9 +3,9 @@ spring:
     out-of-order: true
     baseline-on-migrate: true
   datasource:
-    url: jdbc:postgresql://localhost:5432/organizer
-    username: { USERNAME: }
-    password: { USER_PASSWORD: }
+    url: ${USER_DATABASE:}
+    username: ${USERNAME:}
+    password: ${USER_PASSWORD:}
   jpa:
     hibernate:
       ddl-auto: update

@@ -27,7 +27,7 @@ import lombok.Setter;
 public class Contact {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "contacts_generator")
-    @SequenceGenerator(name="contacts_generator", sequenceName = "contacts_SEQ", allocationSize=1)
+    @SequenceGenerator(name="contacts_generator", sequenceName = "contacts_seq", allocationSize=1)
 
     private Long id;
 

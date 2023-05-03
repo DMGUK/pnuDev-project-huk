@@ -32,7 +32,7 @@ import java.util.List;
 public class Calendars {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "calendars_generator")
-    @SequenceGenerator(name="calendars_generator", sequenceName = "calendars_SEQ", allocationSize=1)
+    @SequenceGenerator(name="calendars_generator", sequenceName = "calendars_seq", allocationSize=1)
     private Long id;
 
     @Column(name = "title")

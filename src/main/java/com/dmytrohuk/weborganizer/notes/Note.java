@@ -28,7 +28,7 @@ import java.time.LocalDate;
 public class Note {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "notes_generator")
-    @SequenceGenerator(name="notes_generator", sequenceName = "notes_SEQ", allocationSize=1)
+    @SequenceGenerator(name="notes_generator", sequenceName = "notes_seq", allocationSize=1)
 
     private Long id;
 
@@ -39,11 +39,11 @@ public class Note {
     private String content;
 
     @Column(name = "created_date")
-    private LocalDate created_date;
+    private LocalDate createdDate;
 
 
     @Column(name = "updated_date")
-    private LocalDate updated_date;
+    private LocalDate updatedDate;
 
 
     @ManyToOne(fetch = FetchType.LAZY)
