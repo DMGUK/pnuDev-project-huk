@@ -8,13 +8,9 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface ReminderMapper {
-    ReminderUpdateDTO toReminderDTO(Reminder reminder);
-
     ReminderViewDTO toViewDTO(Reminder reminder);
 
     List<ReminderViewDTO> toViewDTOCalendarId(List<Reminder> reminder);
-
-    ReminderCreateDTO toReminderCreateDTO(Reminder reminder);
 
     Reminder toReminder(ReminderCreateDTO createDTO);
 

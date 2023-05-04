@@ -1,10 +1,8 @@
 package com.dmytrohuk.weborganizer.users;
 
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import java.util.List;
 
 @AllArgsConstructor
 @Service
@@ -25,7 +23,7 @@ public class UserService {
     public UserViewDTO createUser(UserCreateDTO userDTO) {
         User user = userMapper.toUser(userDTO);
         User existingUser = userRepository.findByUsername(user.getUsername());
-        if (existingUser.equals(user)){
+        if (existingUser != null){
             throw new UserAlreadyExistsException(new Throwable("User already exists"));
         }
         return userMapper.toViewDTO(userRepository.save(user));

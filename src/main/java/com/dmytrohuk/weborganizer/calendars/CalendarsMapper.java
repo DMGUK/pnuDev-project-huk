@@ -6,10 +6,6 @@ import org.mapstruct.MappingTarget;
 
 @Mapper(componentModel = "spring")
 public interface CalendarsMapper {
-    CalendarsUpdateDTO toCalendarDTO(Calendars calendar);
-
-    CalendarsCreateDTO toCalendarCreateDTO(Calendars calendar);
-
     CalendarsViewDTO toViewDTO(Calendars calendar);
     Calendars toCalendar(CalendarsCreateDTO createDTO);
 

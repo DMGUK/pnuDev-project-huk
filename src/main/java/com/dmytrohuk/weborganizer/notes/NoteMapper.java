@@ -6,11 +6,7 @@ import org.mapstruct.MappingTarget;
 
 @Mapper(componentModel = "spring")
 public interface NoteMapper {
-    NoteUpdateDTO toNoteDTO(Note note);
-
     NoteViewDTO toViewDTO(Note note);
-
-    NoteCreateDTO toNoteCreateDTO(Note note);
 
     Note toNote(NoteCreateDTO noteCreateDTO);
 

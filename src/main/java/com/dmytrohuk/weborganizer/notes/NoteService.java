@@ -14,9 +14,9 @@ public class NoteService {
 
     private final NoteMapper noteMapper;
 
-    public Note createNote(NoteCreateDTO noteDTO) {
+    public NoteViewDTO createNote(NoteCreateDTO noteDTO) {
         Note note = noteMapper.toNote(noteDTO);
-        return noteRepository.save(note);
+        return noteMapper.toViewDTO(noteRepository.save(note));
     }
 
     public NoteViewDTO viewNote(Long id) {

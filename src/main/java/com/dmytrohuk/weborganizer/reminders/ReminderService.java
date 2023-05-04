@@ -14,9 +14,9 @@ public class ReminderService {
 
     private final ReminderMapper reminderMapper;
 
-    public Reminder createReminder(ReminderCreateDTO createDTO){
+    public ReminderViewDTO createReminder(ReminderCreateDTO createDTO){
         Reminder reminder = reminderMapper.toReminder(createDTO);
-        return reminderRepository.save(reminder);
+        return reminderMapper.toViewDTO(reminderRepository.save(reminder));
     }
 
     public ReminderViewDTO viewReminderByReminderId(Long id) {
