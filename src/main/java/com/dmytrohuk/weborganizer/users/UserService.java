@@ -24,6 +24,10 @@ public class UserService {
 
     public UserViewDTO createUser(UserCreateDTO userDTO) {
         User user = userMapper.toUser(userDTO);
+        User existingUser = userRepository.findByUsername(user.getUsername());
+        if (existingUser.equals(user)){
+            throw new UserAlreadyExistsException(new Throwable("User already exists"));
+        }
         return userMapper.toViewDTO(userRepository.save(user));
     }
 
