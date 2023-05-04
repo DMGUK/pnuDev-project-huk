@@ -10,6 +10,7 @@ public interface CalendarsMapper {
 
     CalendarsCreateDTO toCalendarCreateDTO(Calendars calendar);
 
+    CalendarsViewDTO toViewDTO(Calendars calendar);
     Calendars toCalendar(CalendarsCreateDTO createDTO);
 
     @Mapping(target = "id", ignore = true)

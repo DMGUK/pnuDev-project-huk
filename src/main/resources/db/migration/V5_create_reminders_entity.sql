@@ -1,3 +1,5 @@
+CREATE SEQUENCE IF NOT EXISTS reminders_seq INCREMENT BY 1;
+
 CREATE TABLE reminders(
       id INT CHECK (id > 0) NOT NULL DEFAULT NEXTVAL ('reminders_seq'),
       title VARCHAR(20) NOT NULL,

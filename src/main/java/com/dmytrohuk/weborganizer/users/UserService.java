@@ -22,20 +22,20 @@ public class UserService {
         return userMapper.toViewDTO(existingUser);
     }
 
-    public User createUser(UserCreateDTO userDTO) {
+    public UserViewDTO createUser(UserCreateDTO userDTO) {
         User user = userMapper.toUser(userDTO);
-        return userRepository.save(user);
+        return userMapper.toViewDTO(userRepository.save(user));
     }
 
     @Transactional
-    public UserUpdateDTO updateUser(Long id, UserUpdateDTO updateDTO) {
+    public UserViewDTO updateUser(Long id, UserUpdateDTO updateDTO) {
         User existingUser = userRepository.findById(id).orElseThrow(
             () -> new UserNotFoundException(
                     new Throwable("User with id " + id + " does not exist")
             )
         );
         userMapper.updateUser(updateDTO, existingUser);
-        return userMapper.toUpdateDTO(userRepository.save(existingUser));
+        return userMapper.toViewDTO(userRepository.save(existingUser));
     }
 
     public void deleteUser(Long id) {

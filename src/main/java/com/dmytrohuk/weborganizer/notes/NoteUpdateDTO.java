@@ -15,8 +15,4 @@ public class NoteUpdateDTO {
     private String title;
 
     private String content;
-
-    private final LocalDate updated_date = LocalDate.now();
-
-    private Long userId;
 }

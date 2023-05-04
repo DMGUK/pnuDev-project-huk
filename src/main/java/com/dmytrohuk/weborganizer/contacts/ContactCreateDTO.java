@@ -14,5 +14,4 @@ public class ContactCreateDTO {
 
     private String surname;
 
-    private Long userId;
 }

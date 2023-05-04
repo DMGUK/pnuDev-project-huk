@@ -14,9 +14,7 @@ public class ReminderCreateDTO {
 
     private String content;
 
-    private LocalDate duedate;
-
-    private Long userId;
+    private LocalDate dueDate;
 
     private Long calendarId;
 }

@@ -14,9 +14,7 @@ public class NoteViewDTO {
 
     private String content;
 
-    private LocalDate created_date;
+    private LocalDate createdDate;
 
-    private LocalDate updated_date;
-
-    private Long userId;
+    private LocalDate updatedDate;
 }

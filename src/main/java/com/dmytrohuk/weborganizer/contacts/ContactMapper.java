@@ -6,11 +6,11 @@ import org.mapstruct.MappingTarget;
 
 @Mapper(componentModel = "spring")
 public interface ContactMapper {
-    ContactUpdateDTO toContactDTO(Contact contact);
+    ContactUpdateDTO toUpdateDTO(Contact contact);
 
     ContactViewDTO toViewDTO(Contact contact);
 
-    ContactCreateDTO toContactCreateDTO(Contact contact);
+    ContactCreateDTO toCreateDTO(Contact contact);
 
     Contact toContact(ContactCreateDTO createDTO);
 

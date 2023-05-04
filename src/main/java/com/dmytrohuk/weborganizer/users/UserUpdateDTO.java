@@ -1,5 +1,7 @@
 package com.dmytrohuk.weborganizer.users;
 
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,4 +21,7 @@ public class UserUpdateDTO {
     private String email;
 
     private String address;
+
+    @Enumerated(EnumType.STRING)
+    private UserRole role;
 }

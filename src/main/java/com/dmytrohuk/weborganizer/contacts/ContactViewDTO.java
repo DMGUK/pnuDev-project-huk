@@ -14,5 +14,4 @@ public class ContactViewDTO {
 
     private String surname;
 
-    private Long userId;
 }

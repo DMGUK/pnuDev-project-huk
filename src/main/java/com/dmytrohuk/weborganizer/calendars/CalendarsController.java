@@ -1,33 +1,32 @@
 package com.dmytrohuk.weborganizer.calendars;
 
-import com.dmytrohuk.weborganizer.users.User;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import lombok.AllArgsConstructor;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/calendars")
+@AllArgsConstructor
 public class CalendarsController {
     private final CalendarsService calendarsService;
-
-    @Autowired
-    public CalendarsController(CalendarsService calendarsService) {
-        this.calendarsService = calendarsService;
-    }
 
     @PostMapping
     public void createNewNote(@RequestBody CalendarsCreateDTO createDTO){
         calendarsService.createCalendar(createDTO);
     }
 
-    @PutMapping(path = "{calendar-id}")
-    public void updateContact(@PathVariable("calendar-id") Long calendarId, @RequestBody CalendarsUpdateDTO updateDTO){
+    @PutMapping(path = "{id}")
+    public void updateContact(@PathVariable("id") Long calendarId, @RequestBody CalendarsUpdateDTO updateDTO){
         calendarsService.editCalendar(calendarId, updateDTO);
     }
 
-    @DeleteMapping(path = "{calendar-id}")
-    public void deleteContact(@PathVariable("calendar-id") Long calendarId){
+    @DeleteMapping(path = "{id}")
+    public void deleteContact(@PathVariable("id") Long calendarId){
         calendarsService.deleteCalendar(calendarId);
     }
 }

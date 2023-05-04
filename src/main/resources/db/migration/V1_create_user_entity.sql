@@ -1,3 +1,5 @@
+CREATE SEQUENCE IF NOT EXISTS users_seq INCREMENT BY 1;
+
 CREATE TABLE IF NOT EXISTS users(
     id INT CHECK (id > 0) NOT NULL DEFAULT NEXTVAL ('users_seq'),
     username VARCHAR(20) UNIQUE NOT NULL,
@@ -8,3 +10,10 @@ CREATE TABLE IF NOT EXISTS users(
     address VARCHAR(40) NOT NULL,
     role TEXT NOT NULL
 );
+
+ALTER TABLE users
+    ADD CONSTRAINT username UNIQUE (username);
+ALTER TABLE users
+    ADD CONSTRAINT email UNIQUE (email);
+ALTER TABLE users
+    ADD CONSTRAINT password UNIQUE (password);

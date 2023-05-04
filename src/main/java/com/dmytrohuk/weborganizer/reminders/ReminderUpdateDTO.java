@@ -14,5 +14,5 @@ public class ReminderUpdateDTO {
 
     private String content;
 
-    private LocalDate duedate;
+    private LocalDate dueDate;
 }

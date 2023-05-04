@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import java.time.LocalDate;
 
 @Service
 @AllArgsConstructor
@@ -29,14 +29,15 @@ public class NoteService {
     }
 
     @Transactional
-    public NoteCreateDTO updateNote(Long id, NoteUpdateDTO updateDTO) {
+    public NoteViewDTO updateNote(Long id, NoteUpdateDTO updateDTO) {
         Note existingNote =noteRepository.findById(id).orElseThrow(
                 () -> new NoteNotFoundException(
                         new Throwable("Note with id " + id + " does not exist")
                 )
         );
         noteMapper.updateNote(updateDTO, existingNote);
-        return noteMapper.toNoteCreateDTO(noteRepository.save(existingNote));
+        existingNote.setUpdatedDate(LocalDate.now());
+        return noteMapper.toViewDTO(noteRepository.save(existingNote));
     }
 
     public void deleteUser(Long id) {

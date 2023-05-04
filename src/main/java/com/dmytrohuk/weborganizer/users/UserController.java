@@ -1,22 +1,24 @@
 package com.dmytrohuk.weborganizer.users;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import lombok.AllArgsConstructor;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/users")
+@AllArgsConstructor
 public class UserController {
     private final UserService userService;
 
-    @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
-
-    @GetMapping(path = "{user-id}")
-    public UserViewDTO getUserById(@PathVariable("user-id") Long userId){
+    @GetMapping(path = "{id}")
+    public UserViewDTO getUserById(@PathVariable("id") Long userId){
         return userService.getUserById(userId);
     }
 
@@ -25,8 +27,8 @@ public class UserController {
         userService.createUser(userDTO);
     }
 
-    @DeleteMapping(path="{user-id}")
-    public void deleteUser(@PathVariable("user-id") Long userId){
+    @DeleteMapping(path="{id}")
+    public void deleteUser(@PathVariable("id") Long userId){
         userService.deleteUser(userId);
     }
 
@@ -36,8 +38,8 @@ public class UserController {
     @RequestBody UpdateUser updateUser
     *
     */
-    @PutMapping(path = "{user-id}")
-    public void updateUser(@PathVariable("user-id") Long userId, @RequestBody UserUpdateDTO updateDTO){
+    @PutMapping(path = "{id}")
+    public void updateUser(@PathVariable("id") Long userId, @RequestBody UserUpdateDTO updateDTO){
         userService.updateUser(userId, updateDTO);
     }
 }

@@ -1,3 +1,5 @@
+CREATE SEQUENCE IF NOT EXISTS contacts_seq INCREMENT BY 1;
+
 CREATE TABLE IF NOT EXISTS contacts(
     id INT CHECK (id > 0) NOT NULL DEFAULT NEXTVAL ('contacts_seq'),
     name VARCHAR(20) NOT NULL,
