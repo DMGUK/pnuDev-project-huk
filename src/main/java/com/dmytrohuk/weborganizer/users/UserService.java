@@ -14,7 +14,7 @@ public class UserService {
     public UserViewDTO getUserById(Long id) {
         User existingUser = userRepository.findById(id).orElseThrow(
             () -> new UserNotFoundException(
-                    new Throwable("User with id " + id + " does not exist")
+                    new Throwable("User with id " + id + " does not exist".formatted())
             )
         );
         return userMapper.toViewDTO(existingUser);
@@ -24,7 +24,7 @@ public class UserService {
         User user = userMapper.toUser(userDTO);
         User existingUser = userRepository.findByUsername(user.getUsername());
         if (existingUser != null){
-            throw new UserAlreadyExistsException(new Throwable("User already exists"));
+            throw new UserAlreadyExistsException(new Throwable("User already exists".formatted()));
         }
         return userMapper.toViewDTO(userRepository.save(user));
     }
@@ -33,7 +33,7 @@ public class UserService {
     public UserViewDTO updateUser(Long id, UserUpdateDTO updateDTO) {
         User existingUser = userRepository.findById(id).orElseThrow(
             () -> new UserNotFoundException(
-                    new Throwable("User with id " + id + " does not exist")
+                    new Throwable("User with id " + id + " does not exist".formatted())
             )
         );
         userMapper.updateUser(updateDTO, existingUser);
@@ -43,7 +43,7 @@ public class UserService {
     public void deleteUser(Long id) {
         User existingUser = userRepository.findById(id).orElseThrow(
                 () -> new UserNotFoundException(
-                        new Throwable("User with id " + id + " does not exist")
+                        new Throwable("User with id " + id + " does not exist".formatted())
                 )
         );
         userRepository.deleteById(id);

@@ -1,6 +1,6 @@
 package com.dmytrohuk.weborganizer.reminders;
 
-import com.dmytrohuk.weborganizer.calendars.Calendars;
+import com.dmytrohuk.weborganizer.calendars.Calendar;
 import com.dmytrohuk.weborganizer.users.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
@@ -52,7 +52,7 @@ public class Reminder {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "calendar_id", nullable = false, insertable=false, updatable=false)
     @JsonIgnore
-    private Calendars calendar;
+    private Calendar calendar;
 
     @Column(name = "calendar_id")
     private Long calendarId;

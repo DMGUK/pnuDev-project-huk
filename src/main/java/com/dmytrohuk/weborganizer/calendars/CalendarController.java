@@ -12,21 +12,21 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/calendars")
 @AllArgsConstructor
-public class CalendarsController {
-    private final CalendarsService calendarsService;
+public class CalendarController {
+    private final CalendarService calendarService;
 
     @PostMapping
-    public void createNewNote(@RequestBody CalendarsCreateDTO createDTO){
-        calendarsService.createCalendar(createDTO);
+    public void createNewNote(@RequestBody CalendarCreateDTO createDTO){
+        calendarService.createCalendar(createDTO);
     }
 
     @PutMapping(path = "{id}")
-    public void updateContact(@PathVariable("id") Long calendarId, @RequestBody CalendarsUpdateDTO updateDTO){
-        calendarsService.editCalendar(calendarId, updateDTO);
+    public void updateContact(@PathVariable("id") Long calendarId, @RequestBody CalendarUpdateDTO updateDTO){
+        calendarService.editCalendar(calendarId, updateDTO);
     }
 
     @DeleteMapping(path = "{id}")
     public void deleteContact(@PathVariable("id") Long calendarId){
-        calendarsService.deleteCalendar(calendarId);
+        calendarService.deleteCalendar(calendarId);
     }
 }

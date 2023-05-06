@@ -2,5 +2,5 @@ package com.dmytrohuk.weborganizer.calendars;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface CalendarsRepository extends JpaRepository<Calendars, Long> {
+public interface CalendarRepository extends JpaRepository<Calendar, Long> {
 }

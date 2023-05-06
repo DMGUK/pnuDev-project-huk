@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS users(
     id INT CHECK (id > 0) NOT NULL DEFAULT NEXTVAL ('users_seq'),
     username VARCHAR(20) UNIQUE NOT NULL,
     password VARCHAR(30) UNIQUE NOT NULL,
-    firstname VARCHAR(20) NOT NULL,
+    first_name VARCHAR(20) NOT NULL,
     surname VARCHAR(20) NOT NULL,
     email VARCHAR(40) UNIQUE NOT NULL,
     address VARCHAR(40) NOT NULL,

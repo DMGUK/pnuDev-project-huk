@@ -1,6 +1,6 @@
 package com.dmytrohuk.weborganizer.users;
 
-import com.dmytrohuk.weborganizer.calendars.Calendars;
+import com.dmytrohuk.weborganizer.calendars.Calendar;
 import com.dmytrohuk.weborganizer.contacts.Contact;
 import com.dmytrohuk.weborganizer.notes.Note;
 import com.dmytrohuk.weborganizer.reminders.Reminder;
@@ -41,7 +41,7 @@ public class User {
     @Column(name = "password", unique = true)
     private String password;
 
-    @Column(name = "firstname")
+    @Column(name = "first_name")
     private String firstName;
 
     @Column(name = "surname")
@@ -64,7 +64,7 @@ public class User {
     private List<Contact> contacts;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Calendars> calendars;
+    private List<Calendar> calendars;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Reminder> reminders;

@@ -29,7 +29,7 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-public class Calendars {
+public class Calendar {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "calendars_generator")
     @SequenceGenerator(name="calendars_generator", sequenceName = "calendars_seq", allocationSize=1)

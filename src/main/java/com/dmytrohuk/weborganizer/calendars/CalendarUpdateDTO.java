@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CalendarsViewDTO {
+public class CalendarUpdateDTO {
     private String title;
 
     private String description;
