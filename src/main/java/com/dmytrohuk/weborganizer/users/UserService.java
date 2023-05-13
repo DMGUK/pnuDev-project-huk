@@ -26,6 +26,7 @@ public class UserService {
         if (existingUser != null){
             throw new UserAlreadyExistsException(new Throwable("User already exists".formatted()));
         }
+        user.setRole(UserRole.USER);
         return userMapper.toViewDTO(userRepository.save(user));
     }
 

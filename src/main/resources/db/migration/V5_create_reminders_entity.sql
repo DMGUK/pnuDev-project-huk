@@ -6,5 +6,7 @@ CREATE TABLE reminders(
       content TEXT NOT NULL,
       due_date DATE NOT NULL,
       user_id INT NOT NULL,
-      calendar_id INT NOT NULL
+      calendar_id INT NOT NULL,
+      CONSTRAINT reminders_user_id_foreign FOREIGN KEY(user_id) REFERENCES users(id),
+      CONSTRAINT reminders_calendars_id_foreign FOREIGN KEY(calendar_id) REFERENCES calendars(id)
 );

@@ -1,6 +1,7 @@
 package com.dmytrohuk.weborganizer.notes;
 
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,8 +24,8 @@ public class NoteController {
     }
 
     @PostMapping
-    public void createNewNote(@RequestBody NoteCreateDTO noteDTO){
-        noteService.createNote(noteDTO);
+    public void createNewNote(@RequestBody NoteCreateDTO noteDTO, Authentication authentication){
+        noteService.createNote(noteDTO, authentication);
     }
 
 
@@ -34,11 +35,6 @@ public class NoteController {
     }
 
 
-    // create a RequestBody to the User
-        /*
-    @RequestBody UpdateUser updateUser
-    *
-    */
     @PutMapping(path = "{id}")
     public void updateNote(@PathVariable("id") Long userId,@RequestBody NoteUpdateDTO noteUpdateDTO){
         noteService.updateNote(userId, noteUpdateDTO);
