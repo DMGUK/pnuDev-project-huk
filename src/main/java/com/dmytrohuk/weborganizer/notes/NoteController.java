@@ -1,7 +1,9 @@
 package com.dmytrohuk.weborganizer.notes;
 
+import com.dmytrohuk.weborganizer.config.AuthUser;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,8 +26,8 @@ public class NoteController {
     }
 
     @PostMapping
-    public void createNewNote(@RequestBody NoteCreateDTO noteDTO, Authentication authentication){
-        noteService.createNote(noteDTO, authentication);
+    public void createNewNote(@RequestBody NoteCreateDTO noteDTO, @AuthenticationPrincipal AuthUser authUser){
+        noteService.createNote(noteDTO, authUser);
     }
 
 

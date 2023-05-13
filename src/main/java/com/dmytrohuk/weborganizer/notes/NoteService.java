@@ -2,10 +2,12 @@ package com.dmytrohuk.weborganizer.notes;
 
 import com.dmytrohuk.weborganizer.config.AuthUser;
 import com.dmytrohuk.weborganizer.config.AuthUserService;
+import com.dmytrohuk.weborganizer.users.User;
 import com.dmytrohuk.weborganizer.users.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,11 +21,14 @@ public class NoteService {
 
     private final AuthUserService authUserService;
 
+    private final UserRepository userRepository;
+
     private final NoteMapper noteMapper;
 
-    public NoteViewDTO createNote(NoteCreateDTO noteDTO, Authentication authentication) {
+    public NoteViewDTO createNote(NoteCreateDTO noteDTO, AuthUser authUser) {
         Note note = noteMapper.toNote(noteDTO);
-        Long userId = ((AuthUser) authentication.getPrincipal()).getId();
+        UserDetails user = authUserService.loadUserByUsername(authUser.getUsername());
+        Long userId = userRepository.findByUsername(user.getUsername()).getId();
         note.setUserId(userId);
         return noteMapper.toViewDTO(noteRepository.save(note));
     }

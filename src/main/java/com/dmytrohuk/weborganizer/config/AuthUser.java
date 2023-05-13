@@ -9,9 +9,12 @@ import java.util.Collection;
 public class AuthUser extends User implements UserDetails {
     private final Long id;
 
+    private final String username;
+
     public AuthUser(User user) {
         super();
         this.id = user.getId();
+        this.username = user.getUsername();
     }
 
     public Long getId() {
@@ -30,7 +33,7 @@ public class AuthUser extends User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return null;
+        return this.username;
     }
 
     @Override
