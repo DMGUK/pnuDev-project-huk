@@ -2,6 +2,7 @@ package com.dmytrohuk.weborganizer.security;
 
 import com.dmytrohuk.weborganizer.users.User;
 import com.dmytrohuk.weborganizer.users.UserAlreadyExistsException;
+import com.dmytrohuk.weborganizer.users.UserMapper;
 import com.dmytrohuk.weborganizer.users.UserNotFoundException;
 import com.dmytrohuk.weborganizer.users.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,8 +14,11 @@ import org.springframework.stereotype.Service;
 public class AuthUserService implements UserDetailsService {
     private final UserRepository userRepository;
 
-    public AuthUserService(UserRepository userRepository){
+    private final UserMapper userMapper;
+
+    public AuthUserService(UserRepository userRepository, UserMapper userMapper){
         this.userRepository = userRepository;
+        this.userMapper = userMapper;
     }
 
     @Override
@@ -25,6 +29,6 @@ public class AuthUserService implements UserDetailsService {
                     new Throwable("User with username %s does not exist".formatted(username))
             );
         }
-        return new AuthUser(user);
+        return userMapper.toAuthUser(user);
     }
 }

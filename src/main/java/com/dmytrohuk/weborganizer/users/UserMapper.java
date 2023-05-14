@@ -1,5 +1,6 @@
 package com.dmytrohuk.weborganizer.users;
 
+import com.dmytrohuk.weborganizer.security.AuthUser;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
@@ -14,6 +15,8 @@ public interface UserMapper {
     UserUpdateDTO toUpdateDTO(User user);
 
     User toUser(UserCreateDTO userDTO);
+
+    AuthUser toAuthUser(User user);
 
     @Mapping(target = "id", ignore = true)
     void updateUser(UserUpdateDTO updateDTO, @MappingTarget User user);
