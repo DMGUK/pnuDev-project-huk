@@ -1,12 +1,9 @@
 package com.dmytrohuk.weborganizer.notes;
 
-import com.dmytrohuk.weborganizer.config.AuthUser;
-import com.dmytrohuk.weborganizer.config.AuthUserService;
-import com.dmytrohuk.weborganizer.users.User;
+import com.dmytrohuk.weborganizer.security.AuthUser;
+import com.dmytrohuk.weborganizer.security.AuthUserService;
 import com.dmytrohuk.weborganizer.users.UserRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

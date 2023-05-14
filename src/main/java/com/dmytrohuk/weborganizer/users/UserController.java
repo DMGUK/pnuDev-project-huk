@@ -27,17 +27,21 @@ public class UserController {
         userService.createUser(userDTO);
     }
 
+    @PostMapping("/login")
+    public void userLogin(@RequestBody UserLoginDTO userDTO){
+        userService.userLogin(userDTO);
+    }
+
+    /*
+    * TODO:
+    *  Create Authentication (JWT, filters)
+    *  */
+
     @DeleteMapping(path="{id}")
     public void deleteUser(@PathVariable("id") Long userId){
         userService.deleteUser(userId);
     }
 
-
-    // create a RequestBody to the User
-        /*
-    @RequestBody UpdateUser updateUser
-    *
-    */
     @PutMapping(path = "{id}")
     public void updateUser(@PathVariable("id") Long userId, @RequestBody UserUpdateDTO updateDTO){
         userService.updateUser(userId, updateDTO);

@@ -1,4 +1,4 @@
-package com.dmytrohuk.weborganizer.config;
+package com.dmytrohuk.weborganizer.security;
 
 import com.dmytrohuk.weborganizer.users.User;
 import org.springframework.security.core.GrantedAuthority;
@@ -9,16 +9,12 @@ import java.util.Collection;
 public class AuthUser extends User implements UserDetails {
     private final Long id;
 
-    private final String username;
-
     public AuthUser(User user) {
-        super();
-        this.id = user.getId();
-        this.username = user.getUsername();
+        this.id = super.getId();
     }
 
     public Long getId() {
-        return id;
+        return this.id;
     }
 
     @Override
@@ -28,12 +24,12 @@ public class AuthUser extends User implements UserDetails {
 
     @Override
     public String getPassword() {
-        return null;
+        return super.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return this.username;
+        return super.getUsername();
     }
 
     @Override

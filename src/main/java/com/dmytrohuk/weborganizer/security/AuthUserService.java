@@ -1,7 +1,8 @@
-package com.dmytrohuk.weborganizer.config;
+package com.dmytrohuk.weborganizer.security;
 
 import com.dmytrohuk.weborganizer.users.User;
 import com.dmytrohuk.weborganizer.users.UserAlreadyExistsException;
+import com.dmytrohuk.weborganizer.users.UserNotFoundException;
 import com.dmytrohuk.weborganizer.users.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -19,8 +20,8 @@ public class AuthUserService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
-        if (user != null){
-            throw new UserAlreadyExistsException(
+        if (user == null){
+            throw new UserNotFoundException(
                     new Throwable("User with username %s does not exist".formatted(username))
             );
         }

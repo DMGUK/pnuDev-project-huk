@@ -54,5 +54,4 @@ public class Note {
 
     @Column(name = "user_id")
     private Long userId;
-
 }

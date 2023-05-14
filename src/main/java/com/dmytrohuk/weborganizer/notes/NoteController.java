@@ -1,8 +1,7 @@
 package com.dmytrohuk.weborganizer.notes;
 
-import com.dmytrohuk.weborganizer.config.AuthUser;
+import com.dmytrohuk.weborganizer.security.AuthUser;
 import lombok.AllArgsConstructor;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
