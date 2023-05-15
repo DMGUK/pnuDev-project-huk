@@ -12,8 +12,7 @@ import java.util.Date;
 
 @Component
 public class JWTGenerator {
-    public String generateToken(Authentication authentication){
-        String username = authentication.getName();
+    public String generateToken(String username){
         Date currentDate = new Date();
         Date expireDate = new Date(currentDate.getTime() + SecurityConstants.expire_date);
 

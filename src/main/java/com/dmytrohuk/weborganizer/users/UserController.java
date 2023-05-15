@@ -1,5 +1,6 @@
 package com.dmytrohuk.weborganizer.users;
 
+import com.dmytrohuk.weborganizer.security.AuthResponseDTO;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,8 +29,8 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public void userLogin(@RequestBody UserLoginDTO userDTO){
-        userService.userLogin(userDTO);
+    public AuthResponseDTO userLogin(@RequestBody UserLoginDTO userDTO){
+       return userService.userLogin(userDTO);
     }
 
     /*

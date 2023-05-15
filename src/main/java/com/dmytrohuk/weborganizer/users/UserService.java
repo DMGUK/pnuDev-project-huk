@@ -31,13 +31,7 @@ public class UserService {
     }
 
     public AuthResponseDTO userLogin(UserLoginDTO userDTO){
-        Authentication authentication = authenticationManager.authenticate(
-            new UsernamePasswordAuthenticationToken(
-                userDTO.getUsername(), userDTO.getPassword()
-            )
-        );
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        String token = jwtGenerator.generateToken(authentication);
+        String token = jwtGenerator.generateToken(userDTO.getUsername());
         return new AuthResponseDTO(token);
     }
 
