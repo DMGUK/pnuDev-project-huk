@@ -3,6 +3,7 @@ package com.dmytrohuk.weborganizer.security;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import lombok.NoArgsConstructor;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
@@ -11,6 +12,7 @@ import java.util.Date;
 
 
 @Component
+@NoArgsConstructor
 public class JWTGenerator {
     public String generateToken(String username){
         Date currentDate = new Date();
