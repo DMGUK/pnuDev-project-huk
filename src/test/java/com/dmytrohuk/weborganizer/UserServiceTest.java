@@ -18,6 +18,7 @@ import org.mockito.MockitoAnnotations;
 
 import com.dmytrohuk.weborganizer.users.User;
 public class UserServiceTest {
+    @Mock
     private UserService userService;
 
     @Mock
@@ -37,13 +38,19 @@ public class UserServiceTest {
 
     @Test
     void testCreateUser() {
-        UserCreateDTO userCreateDTO = new UserCreateDTO();
-        userCreateDTO.setUsername("username");
-        userCreateDTO.setPassword("password");
-        userCreateDTO.setEmail("email.abc@email.com");
-        UserViewDTO user = userService.createUser(userCreateDTO);
-        String viewDtoUsername = userViewDTO.getUsername();
-        String createDtoUsername = userCreateDTO.getUsername();
-        assertEquals(viewDtoUsername, createDtoUsername);
+        String username = "John";
+        User userToCreate = new User();
+        userToCreate.setUsername(username);
+
+        UserCreateDTO userCreateDTO = userMapper.toCreateDTO(userToCreate);
+
+        when(userRepository.findByUsername(username)).thenReturn(userToCreate);
+        when(userService.createUser(userCreateDTO)).thenReturn(new UserViewDTO());
+
+        UserViewDTO result = userService.createUser(userCreateDTO);
+
+        assertEquals(true, result);
+        verify(userRepository, times(1)).findByUsername(username);
+        verify(userService, times(1)).createUser(userCreateDTO);
     }
 }
