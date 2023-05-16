@@ -12,7 +12,6 @@ import java.util.Date;
 
 
 @Component
-@NoArgsConstructor
 public class JWTGenerator {
     public String generateToken(String username){
         Date currentDate = new Date();

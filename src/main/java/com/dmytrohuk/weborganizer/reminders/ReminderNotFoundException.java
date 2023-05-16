@@ -1,7 +1,7 @@
 package com.dmytrohuk.weborganizer.reminders;
 
 public class ReminderNotFoundException extends RuntimeException{
-    public ReminderNotFoundException(Throwable err){
-        super(err);
+    public ReminderNotFoundException(String msg){
+        super(msg);
     }
 }

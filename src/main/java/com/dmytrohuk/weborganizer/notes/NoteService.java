@@ -51,7 +51,7 @@ public class NoteService {
         return noteMapper.toViewDTO(noteRepository.save(existingNote));
     }
 
-    public void deleteUser(Long id) {
+    public void deleteNote(Long id) {
         Note existingNote = noteRepository.findById(id).orElseThrow(
                 () -> new NoteNotFoundException(
                         new Throwable("Note with id %d does not exist".formatted(id))

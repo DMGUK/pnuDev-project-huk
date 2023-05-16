@@ -18,9 +18,7 @@ public class ContactService {
 
     public ContactViewDTO viewContact(Long id){
         Contact existingContact = contactRepository.findById(id).orElseThrow(
-            () -> new ContactNotFoundException(
-                new Throwable("Contact with id " + id + " does not exist")
-            )
+            () -> new ContactNotFoundException("Contact with id %d does not exist".formatted(id))
         );
         return contactMapper.toViewDTO(existingContact);
     }
@@ -28,9 +26,7 @@ public class ContactService {
     @Transactional
     public ContactViewDTO updateContact(Long id, ContactUpdateDTO updateDTO){
         Contact existingContact = contactRepository.findById(id).orElseThrow(
-            () -> new ContactNotFoundException(
-                new Throwable("Contact with id " + id + " does not exist")
-            )
+                () -> new ContactNotFoundException("Contact with id %d does not exist".formatted(id))
         );
         contactMapper.updateContact(updateDTO, existingContact);
         return contactMapper.toViewDTO(contactRepository.save(existingContact));
@@ -38,9 +34,7 @@ public class ContactService {
 
     public void deleteContact(Long id){
         Contact existingContact = contactRepository.findById(id).orElseThrow(
-                () -> new ContactNotFoundException(
-                        new Throwable("Contact with id " + id + " does not exist")
-                )
+                () -> new ContactNotFoundException("Contact with id %d does not exist".formatted(id))
         );
         contactRepository.deleteById(id);
     }

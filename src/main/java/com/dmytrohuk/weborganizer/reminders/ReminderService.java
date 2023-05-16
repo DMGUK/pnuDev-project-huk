@@ -21,9 +21,7 @@ public class ReminderService {
 
     public ReminderViewDTO viewReminderByReminderId(Long id) {
         Reminder existingReminder = reminderRepository.findById(id).orElseThrow(
-            () -> new ReminderNotFoundException(
-                    new Throwable("Reminder with id " + id + " does not exist")
-            )
+            () -> new ReminderNotFoundException("Reminder with id %d does not exist".formatted(id))
         );
         return reminderMapper.toViewDTO(existingReminder);
     }
@@ -31,7 +29,7 @@ public class ReminderService {
     public List<ReminderViewDTO> getRemindersByCalendarId(Long calendarId) {
         List<Reminder> reminders = reminderRepository.findByCalendarId(calendarId);
         if (reminders.isEmpty()){
-            throw new ReminderNotFoundException(new Throwable("Calendar with id " + calendarId + " does not exist"));
+            throw new ReminderNotFoundException("Calendar with id %d does not exist".formatted(calendarId));
         }
         return reminderMapper.toViewDTOCalendarId(reminders);
     }
@@ -40,9 +38,7 @@ public class ReminderService {
     @Transactional
     public ReminderViewDTO updateReminder(Long id, ReminderUpdateDTO updateDTO){
         Reminder existingReminder = reminderRepository.findById(id).orElseThrow(
-            () -> new ReminderNotFoundException(
-                    new Throwable("Reminder with id " + id + " does not exist")
-            )
+                () -> new ReminderNotFoundException("Reminder with id %d does not exist".formatted(id))
         );
         reminderMapper.updateReminder(updateDTO, existingReminder);
         return reminderMapper.toViewDTO(reminderRepository.save(existingReminder));
@@ -50,9 +46,7 @@ public class ReminderService {
 
     public void deleteReminder(Long id){
         Reminder existingReminder = reminderRepository.findById(id).orElseThrow(
-                () -> new ReminderNotFoundException(
-                        new Throwable("Reminder with id " + id + " does not exist")
-                )
+                () -> new ReminderNotFoundException("Reminder with id %d does not exist".formatted(id))
         );
         reminderRepository.deleteById(id);
     }

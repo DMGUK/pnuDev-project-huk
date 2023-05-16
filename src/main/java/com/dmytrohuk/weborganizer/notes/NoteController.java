@@ -29,15 +29,13 @@ public class NoteController {
         noteService.createNote(noteDTO, authUser);
     }
 
-
-    @DeleteMapping(path="{id}")
-    public void deleteUser(@PathVariable("id") Long userId){
-        noteService.deleteUser(userId);
-    }
-
-
     @PutMapping(path = "{id}")
     public void updateNote(@PathVariable("id") Long userId,@RequestBody NoteUpdateDTO noteUpdateDTO){
         noteService.updateNote(userId, noteUpdateDTO);
+    }
+
+    @DeleteMapping(path="{id}")
+    public void deleteNote(@PathVariable("id") Long userId){
+        noteService.deleteNote(userId);
     }
 }

@@ -33,10 +33,11 @@ public class UserController {
        return userService.userLogin(userDTO);
     }
 
-    /*
-    * TODO:
-    *  Create Authentication (JWT, filters)
-    *  */
+    @PostMapping("/moderator")
+    public void createModerator(@RequestBody UserCreateDTO userDTO){
+        userService.createModerator(userDTO);
+    }
+
 
     @DeleteMapping(path="{id}")
     public void deleteUser(@PathVariable("id") Long userId){
@@ -46,5 +47,10 @@ public class UserController {
     @PutMapping(path = "{id}")
     public void updateUser(@PathVariable("id") Long userId, @RequestBody UserUpdateDTO updateDTO){
         userService.updateUser(userId, updateDTO);
+    }
+
+    @PutMapping(path = "/moderator/{id}")
+    public void updateToModerator(@PathVariable("id") Long userId){
+        userService.updateToModerator(userId);
     }
 }

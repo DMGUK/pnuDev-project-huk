@@ -1,7 +1,6 @@
 package com.dmytrohuk.weborganizer.security;
 
 import com.dmytrohuk.weborganizer.users.User;
-import com.dmytrohuk.weborganizer.users.UserAlreadyExistsException;
 import com.dmytrohuk.weborganizer.users.UserMapper;
 import com.dmytrohuk.weborganizer.users.UserNotFoundException;
 import com.dmytrohuk.weborganizer.users.UserRepository;
@@ -25,9 +24,7 @@ public class AuthUserService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
         if (user == null){
-            throw new UserNotFoundException(
-                    new Throwable("User with username %s does not exist".formatted(username))
-            );
+            throw new UserNotFoundException("User with username %s does not exist".formatted(username));
         }
         return userMapper.toAuthUser(user);
     }

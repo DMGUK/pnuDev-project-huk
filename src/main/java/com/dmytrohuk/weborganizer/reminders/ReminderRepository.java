@@ -8,6 +8,7 @@ import java.util.List;
 @Repository
 public interface ReminderRepository extends JpaRepository<Reminder, Long> {
     List<Reminder> findByCalendarId(Long id);
+    Reminder findByTitle(String title);
     /*
     * TODO:
     *  Create a findByCalendarId method
