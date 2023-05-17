@@ -44,9 +44,8 @@ public class UserControllerTest {
 
     @Test
     @SqlGroup({
-        @Sql(value = "classpath:init/create-table.sql", executionPhase = BEFORE_TEST_METHOD),
-        @Sql(value = "classpath:empty/reset.sql", executionPhase = BEFORE_TEST_METHOD),
-        @Sql(value = "classpath:init/user-data.sql", executionPhase = BEFORE_TEST_METHOD)
+            @Sql(value = "classpath:empty/reset.sql", executionPhase = BEFORE_TEST_METHOD),
+            @Sql(value = "classpath:init/user-data.sql", executionPhase = BEFORE_TEST_METHOD)
     })
     void testCreateUser() throws Exception{
         final File jsonFile = new ClassPathResource("init/user.json").getFile();
