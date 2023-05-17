@@ -1,5 +1,16 @@
-INSERT INTO users (id, name, email) VALUES (1, 'Roger Clara', 'alicia.marty@gmail.com');
-INSERT INTO users (id, name, email) VALUES (2, 'Camille Guérin', 'rayan.sanchez@yahoo.fr');
-INSERT INTO users (id, name, email) VALUES (3, 'Julien Mael', 'laura.royer@yahoo.fr');
-INSERT INTO users (id, name, email) VALUES (4, 'Gérard Mael', 'victor.dupuis@hotmail.fr');
-INSERT INTO users (id, name, email) VALUES (5, 'Dubois Anaïs', 'alice.lemoine@hotmail.fr');
+INSERT INTO user (id, username, password, first_name, surname, email, address, role)
+VALUES (1, 'username1', 'password1', 'Firstname', 'Surname',
+        'email.abc1@emai.com', '123 Main Str.', 'USER');
+INSERT INTO user (id, username, password, first_name, surname, email, address, role)
+VALUES (2, 'username2', 'password2', 'Firstname', 'Surname',
+        'email.abc2@emai.com', '123 Main Str.', 'USER');
+INSERT INTO user (id, username, password, first_name, surname, email, address, role)
+VALUES (3, 'username3', 'password3', 'Firstname', 'Surname',
+        'email.abc3@emai.com', '123 Main Str.', 'USER');
+INSERT INTO user (id, username, password, first_name, surname, email, address, role)
+VALUES (4, 'username4', 'password4', 'Firstname', 'Surname',
+        'email.abc4@emai.com', '123 Main Str.', 'USER');
+INSERT INTO user (id, username, password, first_name, surname, email, address, role)
+VALUES (5, 'username5', 'password5', 'Firstname', 'Surname',
+        'email.abc5@emai.com', '123 Main Str.', 'USER');
+
