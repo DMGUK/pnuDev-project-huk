@@ -1,9 +1,9 @@
 {
-  "id": 6,
-  "username" : "username6",
-  "password" : "password6",
-  "firstName" : "Firstname",
-  "surname" : "Surname",
-  "email" : "email.abc6@emai.com",
-  "address" : "123 Main Str."
+    "id": 6,
+    "username": "username6",
+    "password": "password6",
+    "firstName": "Firstname",
+    "surname": "Surname",
+    "email": "email.abc6@emai.com",
+    "address": "123 Main Str."
 }
