@@ -45,7 +45,7 @@ public class UserControllerTest {
     @Test
     @WithMockUser(username = "username")
     void testCreateUser() throws Exception{
-        final File jsonFile = new FileSystemResource("src/test/resources/users/init/note.json").getFile();
+        final File jsonFile = new FileSystemResource("src/test/resources/users/init/user.json").getFile();
         final String userToCreate = Files.readString(jsonFile.toPath());
 
         this.mockMvc.perform(

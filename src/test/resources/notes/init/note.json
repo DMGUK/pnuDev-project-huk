@@ -2,7 +2,7 @@
   "id" : 6,
   "title" : "title six",
   "content" : "content six",
-  "created_date" : "2002-01-01",
-  "updated_date" : "2002-01-01",
+  "createdDate" : "2002-01-01",
+  "updatedDate" : "2002-01-01",
   "user_id" : 6
 }
