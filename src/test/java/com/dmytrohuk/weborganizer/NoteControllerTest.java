@@ -1,4 +1,6 @@
 package com.dmytrohuk.weborganizer;
+
+import com.dmytrohuk.weborganizer.notes.NoteRepository;
 import com.dmytrohuk.weborganizer.users.UserRepository;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
@@ -26,67 +28,69 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-
 @SpringBootTest
 @AutoConfigureMockMvc
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 @SqlGroup({
         @Sql(value = "classpath:users/empty/reset.sql", executionPhase = BEFORE_TEST_METHOD),
         @Sql(value = "classpath:users/init/create-table.sql", executionPhase = BEFORE_TEST_METHOD),
-        @Sql(value = "classpath:users/init/user-data.sql", executionPhase = BEFORE_TEST_METHOD)
+        @Sql(value = "classpath:users/init/user-data.sql", executionPhase = BEFORE_TEST_METHOD),
+        @Sql(value = "classpath:notes/empty/reset.sql", executionPhase = BEFORE_TEST_METHOD),
+        @Sql(value = "classpath:notes/init/create-table.sql", executionPhase = BEFORE_TEST_METHOD),
+        @Sql(value = "classpath:notes/init/user-data.sql", executionPhase = BEFORE_TEST_METHOD)
 })
-public class UserControllerTest {
+public class NoteControllerTest {
     @Autowired
-    private UserRepository userRepository;
+    private NoteRepository noteRepository;
 
     @Autowired
     private MockMvc mockMvc;
 
     @Test
     @WithMockUser(username = "username")
-    void testCreateUser() throws Exception{
-        final File jsonFile = new FileSystemResource("src/test/resources/users/init/note.json").getFile();
-        final String userToCreate = Files.readString(jsonFile.toPath());
+    void testCreateNote() throws Exception{
+        final File jsonFile = new FileSystemResource("src/test/resources/notes/init/note.json").getFile();
+        final String noteToCreate = Files.readString(jsonFile.toPath());
 
         this.mockMvc.perform(
-            post("/api/users")
-            .contentType(APPLICATION_JSON)
-            .content(userToCreate)
-        )
-        .andDo(print())
-        .andExpect(status().isOk());
-
-        assertNotEquals(this.userRepository.findByUsername("username6").getId(), 6);
-    }
-    @Test
-    @WithMockUser(username = "username")
-    void testGetUserById() throws Exception{
-        this.mockMvc.perform(get("/api/users/{id}", 5))
+                        post("/api/notes")
+                                .contentType(APPLICATION_JSON)
+                                .content(noteToCreate)
+                )
                 .andDo(print())
                 .andExpect(status().isOk());
-        assertEquals(this.userRepository.findByUsername("username5").getId(), 5);
+
+        assertNotEquals(this.noteRepository.findByTitle("title six").getId(), 6);
+    }
+    @Test
+    @WithMockUser(username = "username")
+    void testGetNoteById() throws Exception{
+        this.mockMvc.perform(get("/api/notes/{id}", 5))
+                .andDo(print())
+                .andExpect(status().isOk());
+        assertEquals(this.noteRepository.findByTitle("title five").getId(), 5);
     }
 
     @Test
     @WithMockUser(username = "username")
-    void testUpdateUserById() throws Exception{
-        final File jsonFile = new FileSystemResource("src/test/resources/users/init/update.json").getFile();
+    void testUpdateNoteById() throws Exception{
+        final File jsonFile = new FileSystemResource("src/test/resources/notes/init/update.json").getFile();
         final String userToUpdate = Files.readString(jsonFile.toPath());
-        this.mockMvc.perform(put("/api/users/{id}", 5)
-                .contentType(APPLICATION_JSON)
-                .content(userToUpdate))
+        this.mockMvc.perform(put("/api/notes/{id}", 5)
+                        .contentType(APPLICATION_JSON)
+                        .content(userToUpdate))
                 .andDo(print())
                 .andExpect(status().isOk());
-        assertEquals(this.userRepository.findById(5l).get().getUsername(), "user");
+        assertEquals(this.noteRepository.findById(5l).get().getTitle(), "new title");
     }
 
     @Test
     @WithMockUser(username = "username")
-    void testDeleteUserById() throws Exception {
-        this.mockMvc.perform(delete("/api/users/{id}", 2))
+    void testDeleteNoteById() throws Exception {
+        this.mockMvc.perform(delete("/api/notes/{id}", 2))
                 .andDo(print())
                 .andExpect(status().isOk());
 
-        assertEquals(this.userRepository.findAll().size(), 4);
+        assertEquals(this.noteRepository.findAll().size(), 4);
     }
 }

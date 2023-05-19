@@ -6,6 +6,9 @@ spring:
     url: ${USER_DATABASE:}
     username: ${USERNAME:}
     password: ${USER_PASSWORD:}
+  freemarker:
+    template-loader-path: "classpath:templates"
+    suffix: ".ftl"
   jpa:
     hibernate:
       ddl-auto: update
