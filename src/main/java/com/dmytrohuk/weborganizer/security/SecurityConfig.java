@@ -41,6 +41,13 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http, JWTAuthenticationFilter jwtAuthenticationFilter) throws Exception {
         http.csrf().disable()
+                .formLogin()
+                    .loginPage("/users/login")
+                    .failureUrl("/login-error.html")
+                .and()
+                    .logout()
+                    .logoutSuccessUrl("/index.html")
+                .and()
                 .exceptionHandling()
                 .authenticationEntryPoint(authEntryPoint)
                 .and()
@@ -49,10 +56,10 @@ public class SecurityConfig {
                 .and()
                 .authorizeHttpRequests()
                 .requestMatchers(
-                        "/api/users/login")
+                        "/users/login", "/api/users/login")
                 .permitAll()
                 .anyRequest()
-                .authenticated();
+                .permitAll();
 //                .authorizeHttpRequests(requests -> requests
 //                        .requestMatchers(HttpMethod.GET).permitAll()
 //                        .anyRequest().authenticated()

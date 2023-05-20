@@ -1,0 +1,28 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link href="https://getbootstrap.com/docs/5.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="/css/login_stylesheet.css" rel="stylesheet">
+</head>
+<body class="text-center">
+    <p th:if="${loginError}" class="error">Wrong user or password</p>
+    <main class="form_sign_in">
+        <form th:action="@{/login.html}" method="post">
+            <h1 class="h3 mb-3 fw-normal">Login</h1>
+
+            <div class="form-floating">
+                <input type="username" class="form-control" id="floatingInput" placeholder="Username">
+                <label for="floatingInput">Username</label>
+            </div>
+            <br>
+            <div class="form-floating">
+                <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                <label for="floatingPassword">Password</label>
+            </div>
+            <br>
+            <button class="w-100 btn btn-primary" type="submit">Sign in</button>
+        </form>
+    </main>
+</body>
+</html>
