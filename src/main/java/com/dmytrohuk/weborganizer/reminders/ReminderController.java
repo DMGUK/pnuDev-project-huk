@@ -1,7 +1,9 @@
 package com.dmytrohuk.weborganizer.reminders;
 
+import com.dmytrohuk.weborganizer.security.AuthUser;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.context.properties.bind.Name;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,8 +23,8 @@ public class ReminderController {
     private final ReminderService reminderService;
 
     @PostMapping
-    public void createReminder(@RequestBody ReminderCreateDTO createDTO){
-        reminderService.createReminder(createDTO);
+    public void createReminder(@RequestBody ReminderCreateDTO createDTO, @AuthenticationPrincipal AuthUser authUser){
+        reminderService.createReminder(createDTO, authUser);
     }
 
     @GetMapping(path = "/", name = "calendarId")

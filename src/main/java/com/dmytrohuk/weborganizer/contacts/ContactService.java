@@ -1,6 +1,10 @@
 package com.dmytrohuk.weborganizer.contacts;
 
+import com.dmytrohuk.weborganizer.security.AuthUser;
+import com.dmytrohuk.weborganizer.security.AuthUserService;
+import com.dmytrohuk.weborganizer.users.UserRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,8 +15,15 @@ public class ContactService {
 
     private final ContactMapper contactMapper;
 
-    public ContactViewDTO createContact(ContactCreateDTO createDTO){
+    private final UserRepository userRepository;
+
+    private final AuthUserService authUserService;
+
+    public ContactViewDTO createContact(ContactCreateDTO createDTO, AuthUser authUser){
         Contact contact = contactMapper.toContact(createDTO);
+        UserDetails user = authUserService.loadUserByUsername(authUser.getUsername());
+        Long userId = userRepository.findByUsername(user.getUsername()).getId();
+        contact.setUserId(userId);
         return contactMapper.toViewDTO(contactRepository.save(contact));
     }
 

@@ -8,14 +8,18 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
@@ -42,11 +46,9 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http, JWTAuthenticationFilter jwtAuthenticationFilter) throws Exception {
         http.csrf().disable()
                 .formLogin()
-                    .loginPage("/users/login")
-                    .failureUrl("/login-error.html")
-                .and()
-                    .logout()
-                    .logoutSuccessUrl("/index.html")
+                    .loginPage("/login")
+                    .defaultSuccessUrl("/main", true)
+//                    .failureUrl("/login-error.html")
                 .and()
                 .exceptionHandling()
                 .authenticationEntryPoint(authEntryPoint)
@@ -68,6 +70,11 @@ public class SecurityConfig {
         return http.build();
     }
 
+    public void configure(WebSecurity web) {
+        web.ignoring()
+                .requestMatchers("/resources/**", "/static/**");
+    }
+
     @Bean
     public AuthenticationManager authenticationManager
         (AuthenticationConfiguration authenticationConfiguration)
@@ -76,7 +83,14 @@ public class SecurityConfig {
     }
 
     @Bean
-    PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+    public PasswordEncoder passwordEncoder() {
+        return NoOpPasswordEncoder.getInstance();
     }
+
+    /*
+    * TODO:
+    *  Debug why username doesn't return
+    *  And then return BCrypt and use @Mapping(target, expression)
+    *  (see Vlad's example)
+    * */
 }

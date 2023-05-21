@@ -8,16 +8,16 @@
 <body class="text-center">
     <p th:if="${loginError}" class="error">Wrong user or password</p>
     <main class="form_sign_in">
-        <form th:action="@{/login.html}" method="post">
+        <form th:action="@{/login}" method="post">
             <h1 class="h3 mb-3 fw-normal">Login</h1>
 
             <div class="form-floating">
-                <input type="username" class="form-control" id="floatingInput" placeholder="Username">
+                <input name="username" class="form-control" id="floatingInput" placeholder="Username">
                 <label for="floatingInput">Username</label>
             </div>
             <br>
             <div class="form-floating">
-                <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
                 <label for="floatingPassword">Password</label>
             </div>
             <br>

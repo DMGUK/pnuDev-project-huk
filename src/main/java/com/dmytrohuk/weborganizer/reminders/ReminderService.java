@@ -1,6 +1,10 @@
 package com.dmytrohuk.weborganizer.reminders;
 
+import com.dmytrohuk.weborganizer.security.AuthUser;
+import com.dmytrohuk.weborganizer.security.AuthUserService;
+import com.dmytrohuk.weborganizer.users.UserRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,8 +18,15 @@ public class ReminderService {
 
     private final ReminderMapper reminderMapper;
 
-    public ReminderViewDTO createReminder(ReminderCreateDTO createDTO){
+    private final UserRepository userRepository;
+
+    private final AuthUserService authUserService;
+
+    public ReminderViewDTO createReminder(ReminderCreateDTO createDTO, AuthUser authUser){
         Reminder reminder = reminderMapper.toReminder(createDTO);
+        UserDetails user = authUserService.loadUserByUsername(authUser.getUsername());
+        Long userId = userRepository.findByUsername(user.getUsername()).getId();
+        reminder.setUserId(userId);
         return reminderMapper.toViewDTO(reminderRepository.save(reminder));
     }
 

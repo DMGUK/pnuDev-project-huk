@@ -1,6 +1,8 @@
 package com.dmytrohuk.weborganizer.contacts;
 
+import com.dmytrohuk.weborganizer.security.AuthUser;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,8 +19,8 @@ public class ContactController {
     private final ContactService contactService;
 
     @PostMapping
-    public void createNewNote(@RequestBody ContactCreateDTO contactDTO){
-        contactService.createContact(contactDTO);
+    public void createNewContact(@RequestBody ContactCreateDTO contactDTO, @AuthenticationPrincipal AuthUser authUser){
+        contactService.createContact(contactDTO, authUser);
     }
 
     @GetMapping(path = "{id}")
