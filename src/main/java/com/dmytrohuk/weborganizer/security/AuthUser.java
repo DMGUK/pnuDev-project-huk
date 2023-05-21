@@ -7,15 +7,15 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 
 public class AuthUser extends User implements UserDetails {
-    private final Long id;
-
-    public AuthUser(User user) {
-        this.id = super.getId();
-    }
-
-    public Long getId() {
-        return this.id;
-    }
+//    private final Long id;
+//
+//    public AuthUser(User user) {
+//        this.id = super.getId();
+//    }
+//
+//    public Long getId() {
+//        return this.id;
+//    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
