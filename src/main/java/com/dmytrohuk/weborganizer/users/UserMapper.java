@@ -4,6 +4,8 @@ import com.dmytrohuk.weborganizer.security.AuthUser;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 
 @Mapper(componentModel = "spring")
@@ -15,7 +17,6 @@ public interface UserMapper {
 
     UserUpdateDTO toUpdateDTO(User user);
 
-//    @Mapping(target = "password", expression = "java(int a = 10;)")
     User toUser(UserCreateDTO userDTO);
 
     AuthUser toAuthUser(User user);

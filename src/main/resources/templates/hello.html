@@ -2,10 +2,14 @@
 <head>
     <title th:text="|Hello|"></title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="https://getbootstrap.com/docs/5.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="/css/login_stylesheet.css" rel="stylesheet">
 </head>
 <body>
 <div class="page-content">
-    <h1>Hello World!</h1>
+    <h1 th:text="|Welcome to the Web Organizer App !!!|"></h1>
+    <p th:text="|Please, choose from following : |"></p>
+    <a href = "/login">Log in</a>
 </div>
 </body>
 </html>

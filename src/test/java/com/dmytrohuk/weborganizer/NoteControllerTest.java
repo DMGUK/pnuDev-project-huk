@@ -79,7 +79,7 @@ public class NoteControllerTest {
         assertNotEquals(this.noteRepository.findByTitle("title six").getId(), 6);
     }
     @Test
-    @WithMockUser(username = "username")
+    @WithUserDetails("username2")
     void testGetNoteById() throws Exception{
         this.mockMvc.perform(get("/api/notes/{id}", 5))
                 .andDo(print())
@@ -88,7 +88,7 @@ public class NoteControllerTest {
     }
 
     @Test
-    @WithMockUser(username = "username")
+    @WithUserDetails("username2")
     void testUpdateNoteById() throws Exception{
         final File jsonFile = new FileSystemResource("src/test/resources/notes/init/update.json").getFile();
         final String userToUpdate = Files.readString(jsonFile.toPath());
@@ -101,7 +101,7 @@ public class NoteControllerTest {
     }
 
     @Test
-    @WithMockUser(username = "username")
+    @WithUserDetails("username2")
     void testDeleteNoteById() throws Exception {
         this.mockMvc.perform(delete("/api/notes/{id}", 2))
                 .andDo(print())

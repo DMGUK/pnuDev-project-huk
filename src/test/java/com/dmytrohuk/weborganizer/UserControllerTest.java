@@ -8,6 +8,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlGroup;
 import org.springframework.test.web.servlet.MockMvc;
@@ -43,7 +44,7 @@ public class UserControllerTest {
     private MockMvc mockMvc;
 
     @Test
-    @WithMockUser(username = "username")
+    @WithUserDetails("username2")
     void testCreateUser() throws Exception{
         final File jsonFile = new FileSystemResource("src/test/resources/users/init/user.json").getFile();
         final String userToCreate = Files.readString(jsonFile.toPath());
@@ -59,7 +60,7 @@ public class UserControllerTest {
         assertNotEquals(this.userRepository.findByUsername("username6").getId(), 6);
     }
     @Test
-    @WithMockUser(username = "username")
+    @WithUserDetails("username2")
     void testGetUserById() throws Exception{
         this.mockMvc.perform(get("/api/users/{id}", 5))
                 .andDo(print())
@@ -68,7 +69,7 @@ public class UserControllerTest {
     }
 
     @Test
-    @WithMockUser(username = "username")
+    @WithUserDetails("username2")
     void testUpdateUserById() throws Exception{
         final File jsonFile = new FileSystemResource("src/test/resources/users/init/update.json").getFile();
         final String userToUpdate = Files.readString(jsonFile.toPath());
@@ -81,7 +82,7 @@ public class UserControllerTest {
     }
 
     @Test
-    @WithMockUser(username = "username")
+    @WithUserDetails("username2")
     void testDeleteUserById() throws Exception {
         this.mockMvc.perform(delete("/api/users/{id}", 2))
                 .andDo(print())
